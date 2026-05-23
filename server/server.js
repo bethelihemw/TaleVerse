@@ -3,21 +3,20 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import dotenv from 'dotenv'
 import storyRoutes from './routes/storyRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import chapterRoutes from './routes/chapterRoutes.js'
 
 
 
 dotenv.config()
 const app = express();
 
-
-
 app.use(cors());
 app.use(express.json());
 
 connectDB();
-
-
-
+app.use("/api/users", authRoutes);
+app.use("/api/chapters", chapterRoutes);
 app.use("/api/stories", storyRoutes);
 
 app.get("/", (req,res) => {

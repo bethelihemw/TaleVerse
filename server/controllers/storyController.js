@@ -5,8 +5,9 @@ import Story from '../models/Story.js';
 
 export const createStory = async(req,res)=>{
     try{
-        const story = await Story.create(req.body);
-        res.status(201).json(story)
+        const story = await Story.create
+        ({...req.body, author: req.user.username});
+        res.status(201).json(story);
     }
     catch(error){
         res.status(500).json({message: error.message})
@@ -40,15 +41,3 @@ export const getStory = async(req,res)=>{
 
 
 
-
-
-
-// export const getstory = async(req,res)=>{
-//     try{
-//         const story = await Story.findById(req.params.id);
-//         res.status(200).json(story)
-//     }
-//     catch(error){
-//         res.status(500).json({message: error.message})
-//     }
-// }
